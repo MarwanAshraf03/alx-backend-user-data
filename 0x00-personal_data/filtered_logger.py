@@ -8,6 +8,4 @@ def filter_datum(fields: List, redaction: str, message: str, separator: str)\
         -> str:
     """obfuscated message generator"""
     new_fields = [f"(?<={x}=)[^;]*" for x in fields]
-    pattern = "|".join(new_fields)
-    message = re.sub(pattern, redaction, message)
-    return message
+    return re.sub("|".join(new_fields), redaction, message)
