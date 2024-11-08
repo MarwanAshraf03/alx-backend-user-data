@@ -7,8 +7,7 @@ from typing import List
 def filter_datum(fields: List, redaction: str, message: str, separator: str)\
         -> str:
     """obfuscated message generator"""
-    for i in fields:
-        message = re.sub(f"{separator}{i}=(.*?){separator}",
-                         f"{separator}{i}={redaction}{separator}",
-                         message)
+    new_fields = [f"(?<={x}=)[^;]*" for x in fields]
+    pattern = "|".join(new_fields)
+    message = re.sub(pattern, redaction, message)
     return message
