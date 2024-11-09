@@ -12,7 +12,7 @@ def filter_datum(fields: List[str], redaction: str, message: str,
     return re.sub("|".join(new_fields), redaction, message)
 
 
-PII_FIELDS = ("name", "email", "phone", "ssn", "ip")
+PII_FIELDS = ("email", "phone", "ssn", "password", "ip")
 
 
 class RedactingFormatter(logging.Formatter):
