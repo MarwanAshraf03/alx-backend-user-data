@@ -81,7 +81,7 @@ def main():
                     logger.level,
                     None,
                     None,
-                    ";".join([f"{i}={j}" for i, j in zip(rows, row)]),
+                    "; ".join([f"{i}={j}" for i, j in zip(rows, row)]),
                     None,
                     None)))
     cursor.close()
