@@ -35,6 +35,7 @@ class RedactingFormatter(logging.Formatter):
         return super().format(record)
 
 def get_logger() -> logging.Logger:
+    """a function to return logging.Logger object"""
     logging.StreamHandler(RedactingFormatter)
     logger = logging.Logger("user_data", logging.INFO)
     return logger
