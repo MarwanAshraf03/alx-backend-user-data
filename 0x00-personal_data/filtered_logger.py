@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """a filtered logger module"""
-import mysql
 import os
 import re
 from typing import List
@@ -65,3 +64,17 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
             database=PERSONAL_DATA_DB_NAME,
     )
     return conn
+
+
+def main():
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT COUNT(*) FROM users;")
+    for row in cursor:
+        print(row[0])
+    cursor.close()
+    db.close()
+
+
+if __name__ == "__main__":
+    main()
