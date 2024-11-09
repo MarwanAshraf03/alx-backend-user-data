@@ -73,10 +73,10 @@ def main():
     cursor.execute("SELECT * FROM users;")
     for row in cursor:
         # ';'.join(row)
-        print(RedactingFormatter(list(PII_FIELDS)).format(logger.makeRecord(logger.name, logger.level,None, None,";".join([str(x) for x in row]), None, None)))
+        # print(RedactingFormatter(list(PII_FIELDS)).format(logger.makeRecord(logger.name, logger.level,None, None,";".join([str(x) for x in row]), None, None)))
         # print(";".join([str(x) for x in row]))
         # print(type(row))
-        # print(row)
+        print(row)
     cursor.close()
     db.close()
 
