@@ -78,7 +78,7 @@ def main():
         print(RedactingFormatter(list(PII_FIELDS)).format(logger.makeRecord(logger.name, logger.level,None, None,";".join([f"{i}={j}" for i, j in zip(rows, row)]), None, None)))
         # print(";".join([str(x) for x in row]))
         # print(type(row))
-        print(row)
+        # print(row)
     cursor.close()
     db.close()
 
