@@ -67,13 +67,15 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
 
 
 def main():
+    rows = ["name", "email", "phone", "ssn", "password", "ip", "last_login", "user_agent"]
     logger = get_logger()
     db = get_db()
     cursor = db.cursor()
     cursor.execute("SELECT * FROM users;")
     for row in cursor:
+        # print(";".join([f"{i}={j}" for i, j in zip(rows, row)]))
         # ';'.join(row)
-        # print(RedactingFormatter(list(PII_FIELDS)).format(logger.makeRecord(logger.name, logger.level,None, None,";".join([str(x) for x in row]), None, None)))
+        print(RedactingFormatter(list(PII_FIELDS)).format(logger.makeRecord(logger.name, logger.level,None, None,";".join([f"{i}={j}" for i, j in zip(rows, row)]), None, None)))
         # print(";".join([str(x) for x in row]))
         # print(type(row))
         print(row)
