@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
 """a filtered logger module"""
+import mysql
+import os
 import re
 from typing import List
 import logging
+import mysql.connector
+
+
+os.environ["PERSONAL_DATA_DB_USERNAME"] = "root"
+os.environ["PERSONAL_DATA_DB_PASSWORD"] = ""
+os.environ["PERSONAL_DATA_DB_HOST"] = "localhost"
+os.environ["PERSONAL_DATA_DB_NAME"] = "holberton"
 
 
 def filter_datum(fields: List[str], redaction: str, message: str,
@@ -45,3 +54,17 @@ def get_logger() -> logging.Logger:
     logger.addHandler(handler)
     logger.propagate = False
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    PERSONAL_DATA_DB_USERNAME: str = os.getenv("PERSONAL_DATA_DB_USERNAME")
+    PERSONAL_DATA_DB_PASSWORD: str = os.getenv("PERSONAL_DATA_DB_PASSWORD")
+    PERSONAL_DATA_DB_HOST: str = os.getenv("PERSONAL_DATA_DB_HOST")
+    PERSONAL_DATA_DB_NAME: str = os.getenv("PERSONAL_DATA_DB_NAME")
+    conn = mysql.connector.connect(
+            user=PERSONAL_DATA_DB_USERNAME,
+            password=PERSONAL_DATA_DB_PASSWORD,
+            host=PERSONAL_DATA_DB_HOST,
+            database=PERSONAL_DATA_DB_NAME,
+    )
+    return conn
