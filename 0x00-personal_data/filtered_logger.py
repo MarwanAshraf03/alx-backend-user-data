@@ -69,9 +69,9 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
 def main():
     db = get_db()
     cursor = db.cursor()
-    cursor.execute("SELECT COUNT(*) FROM users;")
+    cursor.execute("SELECT * FROM users;")
     for row in cursor:
-        print(row[0])
+        print(row)
     cursor.close()
     db.close()
 
