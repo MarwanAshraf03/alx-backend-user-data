@@ -38,5 +38,7 @@ class RedactingFormatter(logging.Formatter):
 def get_logger() -> logging.Logger:
     """a function to return logging.Logger object"""
     formatter = RedactingFormatter(PII_FIELDS)
-    logging.StreamHandler(formatter)
-    return logging.Logger("user_data", logging.INFO)
+    handler = logging.StreamHandler(formatter)
+    logger = logging.Logger("user_data", logging.INFO)
+    logger.addHandler(handler)
+    return logger
