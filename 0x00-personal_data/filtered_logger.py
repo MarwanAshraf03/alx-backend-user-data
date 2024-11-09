@@ -42,4 +42,5 @@ def get_logger() -> logging.Logger:
     handler.setFormatter(formatter)
     logger = logging.Logger("user_data", logging.INFO)
     logger.addHandler(handler)
+    logger.propagate = False
     return logger
