@@ -67,11 +67,12 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
 
 
 def main():
+    logger = get_logger()
     db = get_db()
     cursor = db.cursor()
     cursor.execute("SELECT * FROM users;")
     for row in cursor:
-        print(row)
+        ';'.join(row)
     cursor.close()
     db.close()
 
