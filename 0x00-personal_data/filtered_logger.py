@@ -72,7 +72,9 @@ def main():
     cursor = db.cursor()
     cursor.execute("SELECT * FROM users;")
     for row in cursor:
-        ';'.join(row)
+        # ';'.join(row)
+        print(type(row))
+        print(row)
     cursor.close()
     db.close()
 
