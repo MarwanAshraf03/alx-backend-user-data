@@ -21,8 +21,6 @@ class RedactingFormatter(logging.Formatter):
     SEPARATOR = ";"
     PII_FIELDS = ("email", "phone", "ssn", "password", "ip")
 
-# name,email,phone,ssn,password,ip,last_login,user_agent
-
     def __init__(self, fields: List[str]):
         """constructor"""
         super(RedactingFormatter, self).__init__(self.FORMAT)
@@ -34,8 +32,8 @@ class RedactingFormatter(logging.Formatter):
                                   self.SEPARATOR)
         return super().format(record)
 
+
 def get_logger() -> logging.Logger:
     """a function to return logging.Logger object"""
     logging.StreamHandler(RedactingFormatter)
-    logger = logging.Logger("user_data", logging.INFO)
-    return logger
+    return logging.Logger("user_data", logging.INFO)
