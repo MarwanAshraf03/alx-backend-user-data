@@ -8,10 +8,10 @@ import logging
 import mysql.connector
 
 
-os.environ["PERSONAL_DATA_DB_USERNAME"] = "root"
-os.environ["PERSONAL_DATA_DB_PASSWORD"] = ""
-os.environ["PERSONAL_DATA_DB_HOST"] = "localhost"
-os.environ["PERSONAL_DATA_DB_NAME"] = "holberton"
+# os.environ["PERSONAL_DATA_DB_USERNAME"] = "root"
+# os.environ["PERSONAL_DATA_DB_PASSWORD"] = ""
+# os.environ["PERSONAL_DATA_DB_HOST"] = "localhost"
+# os.environ["PERSONAL_DATA_DB_NAME"] = "holberton"
 
 
 def filter_datum(fields: List[str], redaction: str, message: str,
