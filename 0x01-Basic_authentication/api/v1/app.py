@@ -57,9 +57,9 @@ def forbidden(error) -> str:
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
     port = getenv("API_PORT", "5000")
-    if getenv("AUTH_TYPE") == "auth":
-        auth = Auth()
-    elif getenv("AUTH_TYPE") == "basic_auth":
+    if getenv("AUTH_TYPE") == "basic_auth":
         from api.v1.auth.basic_auth import BasicAuth
         auth = BasicAuth()
+    else:
+        auth = Auth()
     app.run(host=host, port=port, debug=True)
