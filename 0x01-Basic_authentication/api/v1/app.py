@@ -21,6 +21,7 @@ auth = None
 def before():
     """method to act before the request"""
     if auth is not None:
+        print(auth)
         if not auth.require_auth(request.path, ['/api/v1/status/',
                                                 '/api/v1/unauthorized/',
                                                 '/api/v1/forbidden/']):
