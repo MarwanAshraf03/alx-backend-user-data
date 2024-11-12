@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """template module for all authentication system"""
 from base64 import decode, b64decode, b64encode
-from typing import Tuple, TypeVar
+from typing import Tuple, TypeVar, Union
 from api.v1.auth.auth import Auth
 from models.base import Base
 from models.user import User
@@ -47,7 +47,7 @@ class BasicAuth(Auth):
         return (creds[0], creds[1])
 
     def user_object_from_credentials(self, user_email: str, user_pwd: str) ->\
-            TypeVar('User'):
+            Union[TypeVar('User') | None]:
         """a function that returns a user object"""
         if user_email is None or type(user_email).__name__ != "str":
             return None
