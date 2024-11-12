@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """template module for all authentication system"""
 from base64 import decode, b64decode, b64encode
-from typing import Tuple
+from typing import Tuple, TypeVar
 from api.v1.auth.auth import Auth
+from models.base import Base
+from models.user import User
 
 
 class BasicAuth(Auth):
@@ -43,3 +45,21 @@ class BasicAuth(Auth):
             return (None, None)
         creds = decoded_base64_authorization_header.split(":")
         return (creds[0], creds[1])
+
+    def user_object_from_credentials(self, user_email: str, user_pwd: str) ->\
+            TypeVar('User'):
+        """a function that returns a user object"""
+        if user_email is None or type(user_email).__name__ != "str":
+            return None
+        if user_pwd is None or type(user_pwd).__name__ != "str":
+            return None
+        user_list = User.search({"email": user_email})
+        user = None
+        for i in user_list:
+            if user_email in i.__dict__.values():
+                user = i
+        if user is None:
+            return None
+        if not user.is_valid_password(user_pwd):
+            return None
+        return user
