@@ -54,7 +54,7 @@ class BasicAuth(Auth):
         if user_pwd is None or type(user_pwd).__name__ != "str":
             return None
         user_list = User.search({"email": user_email})
-        print(user_list)
+        # print(user_list)
         user = None
         for i in user_list:
             if user_email in i.__dict__.values():
