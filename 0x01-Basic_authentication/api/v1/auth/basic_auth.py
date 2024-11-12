@@ -47,7 +47,7 @@ class BasicAuth(Auth):
         return (creds[0], creds[1])
 
     def user_object_from_credentials(self, user_email: str, user_pwd: str) ->\
-            Union[TypeVar('User') | None]:
+            TypeVar('User'):
         """a function that returns a user object"""
         if user_email is None or type(user_email).__name__ != "str":
             return None
