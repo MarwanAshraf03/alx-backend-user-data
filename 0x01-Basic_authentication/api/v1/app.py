@@ -21,7 +21,6 @@ auth = None
 def before():
     """method to act before the request"""
     if auth is not None:
-        print("hello")
         if not auth.require_auth(request.path, ['/api/v1/status/',
                                                 '/api/v1/unauthorized/',
                                                 '/api/v1/forbidden/']):
@@ -60,6 +59,6 @@ if __name__ == "__main__":
     port = getenv("API_PORT", "5000")
     if getenv("AUTH_TYPE") == "auth":
         auth = Auth()
-    if getenv("AUTH_TYPE") == "basic_auth":
+    elif getenv("AUTH_TYPE") == "basic_auth":
         auth = BasicAuth()
     app.run(host=host, port=port, debug=True)
