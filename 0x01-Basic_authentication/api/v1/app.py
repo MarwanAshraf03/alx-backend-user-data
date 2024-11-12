@@ -18,20 +18,16 @@ auth = None
 
 @app.before_request
 def before():
-    print("hellooo")
-    print(auth)
+    """method to act before the request"""
     if auth is not None:
         print("hello")
         if not auth.require_auth(request.path, ['/api/v1/status/',
                                                 '/api/v1/unauthorized/',
                                                 '/api/v1/forbidden/']):
-            print("auth.require")
             return
         if auth.authorization_header(request) is None:
-            print("auth.auth_header")
             abort(401)
         if auth.current_user(request) is None:
-            print("auth.current_user")
             abort(403)
     else:
         pass
