@@ -53,10 +53,7 @@ class BasicAuth(Auth):
             return None
         if user_pwd is None or type(user_pwd).__name__ != "str":
             return None
-        try:
-            user_list = User.search({"email": user_email})
-        except KeyError:
-            return None
+        user_list = User.search({"email": user_email})
         print(user_list)
         user = None
         for i in user_list:
