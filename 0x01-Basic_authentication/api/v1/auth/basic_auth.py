@@ -43,7 +43,6 @@ class BasicAuth(Auth):
             return (None, None)
         if ":" not in decoded_base64_authorization_header:
             return (None, None)
-        creds = decoded_base64_authorization_header.split(":")
         f_colon = decoded_base64_authorization_header.find(':')
         user_name = decoded_base64_authorization_header[:f_colon]
         password = decoded_base64_authorization_header[f_colon+1:]
@@ -57,7 +56,6 @@ class BasicAuth(Auth):
         if user_pwd is None or type(user_pwd).__name__ != "str":
             return None
         user_list = User.search({"email": user_email})
-        # print(user_list)
         user = None
         for i in user_list:
             if user_email in i.__dict__.values():
