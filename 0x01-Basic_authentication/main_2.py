@@ -4,15 +4,11 @@
 
 if __name__ == "__main__":
     from api.v1.auth.basic_auth import BasicAuth
-    from api.v1.app import auth
 
-    if auth is None:
-        print("'auth' doesn't exist in api/v1/app.py")
-        exit(1)
-
-    if not isinstance(auth, BasicAuth):
-        print("auth is not an instance of BasicAuth")
+    ba = BasicAuth()
+    res = ba.user_object_from_credentials("bob100@hbtn.io", "pwd")
+    if res is not None:
+        print("user_object_from_credentials must return None if 'user_email' is not linked to any user")
         exit(1)
     
     print("OK", end="")
-    
