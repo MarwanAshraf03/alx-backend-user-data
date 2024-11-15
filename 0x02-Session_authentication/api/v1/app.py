@@ -40,9 +40,9 @@ def before():
                 and auth.session_cookie(request) is None:
             print(1)
             abort(401)
-        if auth.authorization_header(request) is None:
-            print(2)
-            abort(401)
+        # if auth.authorization_header(request) is None:
+        #     print(2)
+        #     abort(401)
         if auth.current_user(request) is None:
             print(3)
             abort(403)
