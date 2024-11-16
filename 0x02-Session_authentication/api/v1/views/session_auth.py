@@ -3,6 +3,7 @@
 """
 from flask import jsonify, abort, request
 from api.v1.views import app_views
+from os import getenv
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
@@ -32,6 +33,6 @@ def login() -> str:
         return jsonify({"error": "wrong password"}), 401
     from api.v1.app import auth
     session_id = auth.create_session(user.id)
-    print(session_id)
-    print(auth.session_cookie(request))
-    return user.to_json()
+    ret = jsonify(user.to_json())
+    ret.set_cookie(getenv("SESSION_NAME"), session_id)
+    return ret
