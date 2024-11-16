@@ -8,7 +8,10 @@ from models.user import User
 
 
 class SessionExpAuth(SessionAuth):
-    """"""
+    """
+    a class that inherits SessionAuth and
+    makes sessions with expiary date
+    """
     def __init__(self):
         """an overloaded function of the corresponding parent's function"""
         session_duration = getenv("SESSION_DURATION")
