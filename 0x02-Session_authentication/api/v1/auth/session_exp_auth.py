@@ -37,6 +37,9 @@ class SessionExpAuth(SessionAuth):
         """that returns a User instance based on a cookie value"""
         s_cookie = self.session_cookie(request)
         id = self.user_id_by_session_id.get(s_cookie)
+        created_at = self.user_id_by_session_id[s_cookie]["created_at"]
+        if (datetime.now() - created_at).seconds >= self.session_duration:
+            return None
         return User.get(id["user_id"])
 
     def user_id_for_session_id(self, session_id=None):
@@ -50,7 +53,6 @@ class SessionExpAuth(SessionAuth):
         if "created_at" not in self.user_id_by_session_id[session_id].keys():
             return None
         created_at = self.user_id_by_session_id[session_id]["created_at"]
-        # print(f"the seconds elapsed are: {(datetime.now() - created_at)}")
         if (datetime.now() - created_at).seconds >= self.session_duration:
             return None
         return self.user_id_by_session_id[session_id]["user_id"]
