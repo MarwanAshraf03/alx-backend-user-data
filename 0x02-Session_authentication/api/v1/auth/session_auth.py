@@ -31,6 +31,7 @@ class SessionAuth(Auth):
         """that returns a User instance based on a cookie value"""
         s_cookie = self.session_cookie(request)
         id = self.user_id_by_session_id.get(s_cookie)
+        print(id)
         return User.get(id)
 
     def destroy_session(self, request=None):
