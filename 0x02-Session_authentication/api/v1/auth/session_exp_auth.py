@@ -3,7 +3,6 @@
 from api.v1.auth.session_auth import SessionAuth
 from os import getenv
 from datetime import datetime
-
 from models.user import User
 
 
@@ -15,10 +14,13 @@ class SessionExpAuth(SessionAuth):
     def __init__(self):
         """an overloaded function of the corresponding parent's function"""
         session_duration = getenv("SESSION_DURATION")
-        try:
-            self.session_duration = int(session_duration)
-        except ValueError:
+        if session_duration is None:
             self.session_duration = 0
+        else:
+            try:
+                self.session_duration = int(session_duration)
+            except ValueError:
+                self.session_duration = 0
 
     def create_session(self, user_id=None):
         """an overloaded function of the corresponding parent's function"""
