@@ -50,6 +50,6 @@ class SessionExpAuth(SessionAuth):
         if "created_at" not in self.user_id_by_session_id[session_id].keys():
             return None
         created_at = self.user_id_by_session_id[session_id]["created_at"]
-        if created_at.second - self.session_duration < datetime.now().second:
+        if (datetime.now() - created_at).second >= self.session_duration:
             return None
         return self.user_id_by_session_id[session_id]["user_id"]
