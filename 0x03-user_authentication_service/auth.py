@@ -36,13 +36,13 @@ class Auth:
             raise ValueError(f"User {email} already exists")
         return user
 
-#     def valid_login(self, email: str, password: str) -> bool:
-#         """checks if user is valid or not"""
-#         try:
-#             user = self._db.find_user_by(email=email)
-#             return checkpw(bytes(password, "utf-8"), user.hashed_password)
-#         except NoResultFound:
-#             return False
+    def valid_login(self, email: str, password: str) -> bool:
+        """checks if user is valid or not"""
+        try:
+            user = self._db.find_user_by(email=email)
+            return checkpw(bytes(password, "utf-8"), user.hashed_password)
+        except NoResultFound:
+            return False
 
 #     def create_session(self, email: str) -> str:
 #         """creates a session for a user"""
