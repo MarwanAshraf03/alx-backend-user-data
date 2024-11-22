@@ -48,18 +48,31 @@ class DB:
         if len(s_kwargs.difference(s_attrs)) != 0:
             raise InvalidRequestError
         session = self._session
-        users = session.query(User).all()
-        user = None
-        for u in users:
-            for k, v in kwargs.items():
-                if u.__getattribute__(k) != v:
-                    user = None
-                    break
-                else:
-                    user = u
+        # """"""
+        # users = session.query(User)
+        # for k, v in kwargs.items():
+        #     users = users.filter()
+        # """"""
+        user = session.query(User).filter_by(**kwargs).first()
+        # print(50*"-")
+        # print(user)
         if user is None:
             raise NoResultFound
         return user
+        # users = session.query(User).all()
+        # user = None
+        # print(f"kwargs = {kwargs}")
+        # for u in users:
+        #     print(u.email)
+        #     for k, v in kwargs.items():
+        #         if u.__getattribute__(k) != v:
+        #             user = None
+        #             break
+        #         else:
+        #             user = u
+        # if user is None:
+        #     raise NoResultFound
+        # return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """updates a user"""
