@@ -4,7 +4,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-
+from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.orm.exc import NoResultFound
 from user import Base, User
 
 
@@ -35,4 +36,26 @@ class DB:
         session = self._session
         session.add(user)
         session.commit()
+        return user
+
+    def find_user_by(self, **kwargs):
+        """find user using given keyword arguments"""
+        a = list(User.__dict__.keys())
+        attrs = [attr for attr in a if attr[0] != '_']
+        s_attrs = (set(attrs))
+        s_kwargs = (set(kwargs.keys()))
+        if len(s_kwargs.difference(s_attrs)) != 0:
+            raise InvalidRequestError
+        session = self._session
+        users = session.query(User).all()
+        user = None
+        for u in users:
+            for k, v in kwargs.items():
+                if u.__getattribute__(k) != v:
+                    user = None
+                    break
+                else:
+                    user = u
+        if user is None:
+            raise NoResultFound
         return user
