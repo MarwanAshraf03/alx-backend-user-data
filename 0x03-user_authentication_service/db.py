@@ -7,6 +7,7 @@ from sqlalchemy.orm.session import Session
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
 from user import Base, User
+from typing import Dict
 
 
 class DB:
@@ -38,7 +39,7 @@ class DB:
         session.commit()
         return user
 
-    def find_user_by(self, **kwargs):
+    def find_user_by(self, **kwargs: Dict) -> User:
         """find user using given keyword arguments"""
         a = list(User.__dict__.keys())
         attrs = [attr for attr in a if attr[0] != '_']
