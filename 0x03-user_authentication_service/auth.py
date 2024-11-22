@@ -13,9 +13,9 @@ def _hash_password(password: str) -> bytes:
     return hashpw(bytes(password, "UTF-8"), gensalt())
 
 
-# def _generate_uuid() -> str:
-#     """returns a string representation of a new UUID"""
-#     return str(uuid4())
+def _generate_uuid() -> str:
+    """returns a string representation of a new UUID"""
+    return str(uuid4())
 
 
 class Auth:
