@@ -46,17 +46,17 @@ class Auth:
 
     def create_session(self, email: str) -> str:
         """creates a session for a user"""
-        print(email)
+        # print(email)
         user = None
         try:
             user = self._db.find_user_by(email=email)
         except NoResultFound:
-            print("err")
+            # print("err")
             return None
         session_id = _generate_uuid()
         user.session_id = session_id
         self._db.update_user(user.id, session_id=session_id)
-        print(f"session_id {session_id}, user_id = {user.id}")
+        # print(f"session_id {session_id}, user_id = {user.id}")
         return session_id
 
     # def get_user_from_session_id(self, session_id: str) -> Union[User|None]:
