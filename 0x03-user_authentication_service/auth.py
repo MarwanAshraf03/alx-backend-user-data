@@ -34,7 +34,7 @@ class Auth:
             user = self._db.add_user(email, _hash_password(password))
         if user is None:
             raise ValueError(f"User {email} already exists")
-        print(f"user is {user}")
+        # print(f"user is {user}")
         return user
 
     def valid_login(self, email: str, password: str) -> bool:
