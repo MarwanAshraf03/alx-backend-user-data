@@ -39,7 +39,7 @@ class DB:
         session.commit()
         return user
 
-    def find_user_by(self, **kwargs: Dict) -> User:
+    def find_user_by(self, **kwargs) -> User:
         """find user using given keyword arguments"""
         a = list(User.__dict__.keys())
         attrs = [attr for attr in a if attr[0] != '_']
