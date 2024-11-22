@@ -60,3 +60,16 @@ class DB:
         if user is None:
             raise NoResultFound
         return user
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """updates a user"""
+        a = list(User.__dict__.keys())
+        attrs = [attr for attr in a if attr[0] != '_']
+        s_attrs = (set(attrs))
+        s_kwargs = (set(kwargs.keys()))
+        if len(s_kwargs.difference(s_attrs)) != 0:
+            raise ValueError
+        user_to_update = self.find_user_by(id=user_id)
+        for k, v in kwargs.items():
+            user_to_update.__setattr__(k, v)
+        return None
