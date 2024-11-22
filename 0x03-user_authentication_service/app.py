@@ -8,11 +8,13 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def get_route():
+    """updates a password in method put"""
     return jsonify({"message": "Bienvenue"})
 
 
 @app.route("/users", methods=['POST'], strict_slashes=False)
 def users():
+    """updates a password in method put"""
     email = request.form.get("email")
     password = request.form.get("password")
     try:
@@ -24,6 +26,7 @@ def users():
 
 @app.route("/sessions", methods=['POST'], strict_slashes=False)
 def login():
+    """updates a password in method put"""
     email = request.form.get("email")
     password = request.form.get("password")
     if AUTH.valid_login(email, password):
@@ -37,6 +40,7 @@ def login():
 
 @app.route("/sessions", methods=['DELETE'], strict_slashes=False)
 def logout():
+    """updates a password in method put"""
     session_id = request.cookies.get("session_id")
     user = AUTH.get_user_from_session_id(session_id)
     if user is None:
@@ -48,6 +52,7 @@ def logout():
 
 @app.route("/profile", methods=['GET'], strict_slashes=False)
 def profile():
+    """updates a password in method put"""
     session_id = request.cookies.get("session_id")
     user = AUTH.get_user_from_session_id(session_id)
     if user is None:
@@ -58,6 +63,7 @@ def profile():
 
 @app.route("/reset_password", methods=['POST'], strict_slashes=False)
 def get_reset_password_token():
+    """updates a password in method put"""
     email = request.form.get("email")
     try:
         reset_token = AUTH.get_reset_password_token(email=email)
